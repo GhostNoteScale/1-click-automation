@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO | Portfolio & Introduction</title>
+    <meta name="description" content="Go Nakazawa (GO) - Self Introduction Portfolio">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-alt: #8b5cf6;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        /* Background Animated Blobs for Dynamic Feel */
+        .blob {
+            position: absolute;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 12s infinite ease-in-out alternate;
+            border-radius: 50%;
+        }
+        .blob-1 {
+            width: 50vw;
+            height: 50vw;
+            max-width: 600px;
+            max-height: 600px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            top: -10%;
+            left: -10%;
+        }
+        .blob-2 {
+            width: 40vw;
+            height: 40vw;
+            max-width: 500px;
+            max-height: 500px;
+            background: linear-gradient(to right, #0ea5e9, #10b981);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -6s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 60px) scale(1.1); }
+        }
+
+        .hero {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .hero.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .avatar-container {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 40px rgba(56, 189, 248, 0.2);
+            animation: hoverAvatar 6s ease-in-out infinite;
+        }
+
+        @keyframes hoverAvatar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--bg-color);
+            border: 4px solid var(--bg-color);
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -0.03em;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .handle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            vertical-align: super;
+            margin-left: 0.5rem;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            -webkit-text-fill-color: var(--accent);
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+        }
+
+        .card strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .card .highlight-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-alt);
+            margin-top: 1rem;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .name { font-size: 2.2rem; }
+            .container { padding: 0 1.5rem 3rem; }
+            .card { padding: 1.5rem; }
+            .hero { padding: 3rem 1.5rem 1.5rem; }
+            .avatar-container { width: 120px; height: 120px; }
+            .handle { display: block; margin: 10px auto 0; width: fit-content; }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <header class="hero">
+        <div class="avatar-container">
+            <img src="./public/avatar.png" alt="Profile of Go Nakazawa (GO)" class="avatar">
+        </div>
+        <h1 class="name">中澤 剛 <span class="handle">GO</span></h1>
+        <p class="tagline">Tech Explorer & Thinker</p>
+    </header>
+
+    <main class="container">
+        <section class="card reveal delay-1" id="skills">
+            <h2><div class="icon-wrap">💡</div>得意なこと</h2>
+            <p><strong>考えること</strong></p>
+            <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                物事の本質を捉え、論理的に思考を深めることが得意です。複雑に見える課題も、紐解きながら解決への道筋を見つけ出すプロセスを大切にしています。
+            </p>
+        </section>
+
+        <section class="card reveal delay-2" id="interests">
+            <h2><div class="icon-wrap">🎭</div>興味があること</h2>
+            <p><strong>お笑い</strong></p>
+            <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                人を笑顔にする力や、巧妙なトークの構成に興味があります。日常の視点を少し変えるだけで新しい面白さが生まれる点は、ものづくりにも通じると感じています。
+            </p>
+        </section>
+
+        <section class="card reveal delay-3" id="ai-thought">
+            <h2><div class="icon-wrap">🤖</div>AIに対する想い</h2>
+            <div class="highlight-box">
+                <p>自分にとって AI は、<strong style="color: #38bdf8;">考えを深めてくれる壁打ち相手</strong>のような存在です。</p>
+                <p style="margin-top: 1rem; color: #cbd5e1;">
+                    単なるツールとして使うだけでなく、今後 AI と「どのように向き合っていくべきか」という人間とAIの関係性や向き合い方自体を、より深く考えていきたいと思っています。
+                </p>
+            </div>
+        </section>
+
+        <section class="card reveal delay-4" id="goals">
+            <h2><div class="icon-wrap">🚀</div>授業での目標</h2>
+            <div class="highlight-box" style="border-left-color: #10b981;">
+                <p>この授業を通じて、<strong>何か発想を豊かにするようなアプリ</strong>を作りたいです。</p>
+                <p style="margin-top: 1rem; color: #cbd5e1;">
+                    また、世界の<strong>どんな面白い人がいるのか</strong>というのを調べてみたいと考えています。テクノロジーと人の交差点にある面白さを探究していきたいです。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nakazawa Go (GO). Designed and built with AI.</p>
+    </footer>
+
+    <script>
+        // Use Intersection Observer API for smooth scrolling animations
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: stop observing once revealed
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach((el) => {
+                observer.observe(el);
+            });
+            
+            // Initial animation trigger for the hero section
+            setTimeout(() => {
+                document.querySelector('.hero').classList.add('active');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
